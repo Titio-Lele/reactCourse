@@ -11,6 +11,7 @@ export default class Conversor extends Component {
     }
 
     this.converter = this.converter.bind(this)
+    // o rato roeu a roupa do rei de roma
   }
 
   converter () {
