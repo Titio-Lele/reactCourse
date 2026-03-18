@@ -27,7 +27,7 @@ export default class Conversor extends Component {
         let moedaB_valor = (
           parseFloat(this.state.moedaA_valor) * cotacao
         ).toFixed(2)
-        if (moedaB_valor == 'NaN') {
+        if (isNaN(moedaB_valor)) {
           this.setState({ moedaB_valor: 0 })
           console.log(moedaB_valor)
         } else {
