@@ -1,29 +1,114 @@
-.linha{
+:root {
+    --brand-primary: #cc092f;
+    --brand-primary-strong: #a10525;
+    --brand-surface: #fff7f8;
+    --brand-ink: #22223b;
+    --brand-muted: #5b6272;
+    --card-border: #efcfd6;
+}
+
+.App {
+    min-height: 100vh;
+    padding: 28px 20px 40px;
+    background:
+        radial-gradient(circle at 12% 10%, rgba(204, 9, 47, 0.18), transparent 40%),
+        radial-gradient(circle at 88% 0%, rgba(250, 211, 220, 0.85), transparent 34%),
+        linear-gradient(160deg, #ffffff 0%, #fff7f8 50%, #fff0f3 100%);
+}
+
+.bank-header {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: linear-gradient(125deg, var(--brand-primary) 0%, #e73859 100%);
+    border-radius: 20px;
+    color: #ffffff;
+    padding: 24px;
     display: flex;
-    margin-top: 40px;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: flex-start;
-    gap: 24px;
+    gap: 16px;
+    box-shadow: 0 18px 35px rgba(149, 10, 38, 0.28);
 }
 
-h1{
-    text-align: center;
+.brand-pill {
+    display: inline-flex;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-radius: 999px;
+    padding: 6px 10px;
+    margin-bottom: 10px;
 }
 
-.App{
-    margin: auto;
-    max-width: 900px;
+.brand-block h1 {
+    margin: 0;
+    font-size: clamp(1.8rem, 2.4vw, 2.2rem);
+    font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+}
+
+.bank-subtitle {
+    margin: 8px 0 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.status-card {
+    background: rgba(255, 255, 255, 0.17);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 14px;
+    padding: 10px 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #66f58b;
+    box-shadow: 0 0 0 5px rgba(102, 245, 139, 0.22);
+}
+
+.bank-main {
+    max-width: 1100px;
+    margin: 18px auto 0;
+    padding: 22px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(2px);
+    border: 1px solid #f6dde2;
+}
+
+.section-header h2 {
+    margin: 0;
+    color: var(--brand-ink);
+    font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+}
+
+.section-header p {
+    margin: 8px 0 18px;
+    color: var(--brand-muted);
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
 }
 
 .conversor-skeleton {
     position: relative;
     overflow: hidden;
     padding: 20px;
-    width: min(100%, 300px);
-    min-height: 210px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    background: #ffffff;
+    min-height: 236px;
+    border-radius: 12px;
+    background: linear-gradient(160deg, #ffffff 0%, var(--brand-surface) 100%);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 10px 24px rgba(190, 43, 77, 0.12);
 }
 
 .conversor-skeleton::after {
@@ -34,7 +119,7 @@ h1{
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.6) 45%,
+      rgba(255, 255, 255, 0.65) 50%,
       rgba(255, 255, 255, 0) 100%
     );
     animation: skeleton-shimmer 1.4s infinite;
@@ -43,14 +128,14 @@ h1{
 .skeleton-hint {
     margin: 0 0 14px;
     font-size: 12px;
-    color: #4a5568;
-    letter-spacing: 0.03em;
+    color: #7f3a4b;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
 }
 
 .skeleton-line {
-    background: #e6e9ef;
-    border-radius: 6px;
+    background: #f0d8de;
+    border-radius: 7px;
     margin-bottom: 12px;
 }
 
@@ -60,18 +145,18 @@ h1{
 }
 
 .skeleton-input {
-    height: 34px;
+    height: 38px;
     width: 100%;
 }
 
 .skeleton-button {
-    height: 34px;
-    width: 42%;
+    height: 38px;
+    width: 48%;
 }
 
 .skeleton-result {
-    height: 28px;
-    width: 32%;
+    height: 32px;
+    width: 38%;
     margin-bottom: 0;
 }
 
@@ -82,8 +167,18 @@ h1{
 }
 
 @media (max-width: 760px) {
-    .linha {
+    .App {
+        padding: 20px 14px 34px;
+    }
+
+    .bank-header {
+        border-radius: 16px;
+        padding: 18px;
         flex-direction: column;
-        align-items: center;
+    }
+
+    .bank-main {
+        border-radius: 16px;
+        padding: 16px;
     }
 }

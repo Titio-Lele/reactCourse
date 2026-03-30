@@ -1,70 +1,55 @@
-import React, { Component } from 'react'
+import React, { useId } from 'react'
 import './Conversor.css'
+import useConversorViewModel from './useConversorViewModel'
 
-export default class Conversor extends Component {
-  constructor (props) {
-    super(props)
+export default function Conversor({ moedaA, moedaB }) {
+  const inputId = useId()
+  const {
+    isLoading,
+    moedaAValor,
+    moedaBValor,
+    ultimaAtualizacao,
+    statusConsulta,
+    handleMoedaAValorChange,
+    converter
+  } = useConversorViewModel({ moedaA, moedaB })
 
-    this.state = {
-      moedaA_valor: '',
-      moedaB_valor: 0
-    }
-
-    this.converter = this.converter.bind(this)
-    // o rato roeu a roupa do rei de roma
-  }
-
-  converter () {
-    const { moedaA, moedaB } = this.props
-    const inputValue = parseFloat(this.state.moedaA_valor)
-
-    if (Number.isNaN(inputValue)) {
-      this.setState({ moedaB_valor: 0 })
-      return
-    }
-
-    const url = `https://open.er-api.com/v6/latest/${moedaA}`
-
-    fetch(url)
-      .then(res => {
-        return res.json()
-      })
-      .then(json => {
-        const cotacao = json?.rates?.[moedaB]
-
-        if (typeof cotacao !== 'number') {
-          throw new Error('Invalid exchange rate payload')
-        }
-
-        const moedaB_valor = (inputValue * cotacao).toFixed(2)
-        this.setState({ moedaB_valor })
-      })
-      .catch(() => {
-        this.setState({ moedaB_valor: 0 })
-      })
-  }
-
-  render () {
-    return (
-      <div className='conversor'>
-        <h2 className='conversor-title'>
-          {this.props.moedaA} para {this.props.moedaB}
-        </h2>
-        <input
-          className='conversor-input'
-          type='text'
-          onChange={event => {
-            this.setState({ moedaA_valor: event.target.value })
-          }}
-        ></input>
-        <input
-          className='conversor-button'
-          type='button'
-          value='Converter'
-          onClick={this.converter}
-        ></input>
-        <h2 className='conversor-result'>{this.state.moedaB_valor}</h2>
+  return (
+    <div className={`conversor${isLoading ? ' conversor-loading' : ''}`} aria-busy={isLoading}>
+      <div className='conversor-topbar'>
+        <div>
+          <h2 className='conversor-title'>
+            {moedaA} para {moedaB}
+          </h2>
+          <p className='conversor-caption'>Mesa digital de cambio</p>
+        </div>
+        <div className='conversor-update-panel'>
+          <span className='conversor-update-label'>Ultima atualizacao</span>
+          <strong className='conversor-update-value'>{ultimaAtualizacao}</strong>
+          <span className='conversor-status'>{statusConsulta}</span>
+        </div>
       </div>
-    )
-  }
+
+      <label className='conversor-label' htmlFor={inputId}>
+        Valor em {moedaA}
+      </label>
+      <input
+        id={inputId}
+        className='conversor-input'
+        type='text'
+        inputMode='decimal'
+        placeholder='0,00'
+        value={moedaAValor}
+        onChange={handleMoedaAValorChange}
+      ></input>
+      <input
+        className='conversor-button'
+        type='button'
+        value={isLoading ? 'Consultando...' : 'Converter'}
+        disabled={isLoading}
+        onClick={converter}
+      ></input>
+      <h2 className='conversor-result'>{moedaBValor}</h2>
+    </div>
+  )
 }

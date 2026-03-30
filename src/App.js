@@ -49,46 +49,32 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Conversor de moedas</h1>
-      <div className="linha">
-        {isLoading ? (
-          <>
-            <ConversorSkeleton />
-            <ConversorSkeleton />
-          </>
-        ) : (
-          <>
-            <Conversor moedaA={PAIRS[0][0]} moedaB={PAIRS[0][1]} />
-            <Conversor moedaA={PAIRS[1][0]} moedaB={PAIRS[1][1]} />
-          </>
-        )}
-      </div>
-      <div className="linha">
-        {isLoading ? (
-          <>
-            <ConversorSkeleton />
-            <ConversorSkeleton />
-          </>
-        ) : (
-          <>
-            <Conversor moedaA={PAIRS[2][0]} moedaB={PAIRS[2][1]} />
-            <Conversor moedaA={PAIRS[3][0]} moedaB={PAIRS[3][1]} />
-          </>
-        )}
-      </div>
-      <div className="linha">
-        {isLoading ? (
-          <>
-            <ConversorSkeleton />
-            <ConversorSkeleton />
-          </>
-        ) : (
-          <>
-            <Conversor moedaA={PAIRS[4][0]} moedaB={PAIRS[4][1]} />
-            <Conversor moedaA={PAIRS[5][0]} moedaB={PAIRS[5][1]} />
-          </>
-        )}
-      </div>
+      <header className="bank-header">
+        <div className="brand-block">
+          <span className="brand-pill">Bradesco Exchange</span>
+          <h1>Conversor de moedas</h1>
+          <p className="bank-subtitle">Consulta de cotacao com visual de internet banking</p>
+        </div>
+        <div className="status-card" aria-label="Status da central de cotacoes">
+          <span className="status-dot" />
+          <span>Central ativa</span>
+        </div>
+      </header>
+
+      <main className="bank-main" aria-label="Painel de cotacoes">
+        <section className="section-header">
+          <h2>Consulta de Cotacao</h2>
+          <p>Escolha um card, informe o valor e clique em Converter.</p>
+        </section>
+
+        <section className="cards-grid">
+          {isLoading
+            ? PAIRS.map(pair => <ConversorSkeleton key={pair.join('-')} />)
+            : PAIRS.map(pair => (
+              <Conversor key={pair.join('-')} moedaA={pair[0]} moedaB={pair[1]} />
+              ))}
+        </section>
+      </main>
     </div>
   );
 }

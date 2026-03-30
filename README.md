@@ -10,6 +10,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 REACT_APP_SKELETON_DELAY_MS=2000 npm start
 ```
 
+## Documentation
+
+- [docs/GUIA_MELHORIAS_REACT.md](docs/GUIA_MELHORIAS_REACT.md): learning guide explaining the architectural and UX improvements made in this project.
+- [docs/SKELETON_LOADING_CHANGES.md](docs/SKELETON_LOADING_CHANGES.md): notes about the skeleton loading flow and related test updates.
+
 ## Available Scripts
 
 In the project directory, you can run:
