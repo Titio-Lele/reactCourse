@@ -1,5 +1,57 @@
 .conversor{
     padding: 20px;
-    max-width: 300px;
+    width: min(100%, 300px);
+    min-height: 210px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #e5e9f2;
+    display: flex;
+    flex-direction: column;
+}
+
+.conversor-title {
+    margin: 0 0 14px;
+    font-size: 20px;
+    line-height: 1.3;
+    color: #1f2937;
+}
+
+.conversor-input {
+    height: 38px;
+    border: 1px solid #d5ddeb;
+    border-radius: 6px;
+    padding: 0 10px;
+    font-size: 15px;
+    color: #1f2937;
+    margin-bottom: 12px;
+}
+
+.conversor-input:focus {
+    outline: none;
+    border-color: #8aa4d6;
+    box-shadow: 0 0 0 3px rgba(138, 164, 214, 0.2);
+}
+
+.conversor-button {
+    height: 38px;
+    width: 44%;
+    border: 0;
+    border-radius: 6px;
+    background: #2f6fd6;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-bottom: 16px;
+}
+
+.conversor-button:hover {
+    background: #255db7;
+}
+
+.conversor-result {
+    margin: auto 0 0;
+    font-size: 30px;
+    color: #0f172a;
 }

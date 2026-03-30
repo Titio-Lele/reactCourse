@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Environment Variables
+
+- `REACT_APP_SKELETON_DELAY_MS`: controls the initial skeleton loading duration in milliseconds.
+- Default value: `5000`.
+- Example usage:
+
+```bash
+REACT_APP_SKELETON_DELAY_MS=2000 npm start
+```
+
 ## Available Scripts
 
 In the project directory, you can run:

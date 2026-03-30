@@ -2,6 +2,8 @@
     display: flex;
     margin-top: 40px;
     justify-content: space-around;
+    align-items: flex-start;
+    gap: 24px;
 }
 
 h1{
@@ -11,4 +13,77 @@ h1{
 .App{
     margin: auto;
     max-width: 900px;
+}
+
+.conversor-skeleton {
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    width: min(100%, 300px);
+    min-height: 210px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.conversor-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.6) 45%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    animation: skeleton-shimmer 1.4s infinite;
+}
+
+.skeleton-hint {
+    margin: 0 0 14px;
+    font-size: 12px;
+    color: #4a5568;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.skeleton-line {
+    background: #e6e9ef;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.skeleton-title {
+    height: 24px;
+    width: 70%;
+}
+
+.skeleton-input {
+    height: 34px;
+    width: 100%;
+}
+
+.skeleton-button {
+    height: 34px;
+    width: 42%;
+}
+
+.skeleton-result {
+    height: 28px;
+    width: 32%;
+    margin-bottom: 0;
+}
+
+@keyframes skeleton-shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@media (max-width: 760px) {
+    .linha {
+        flex-direction: column;
+        align-items: center;
+    }
 }

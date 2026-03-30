@@ -15,42 +15,55 @@ export default class Conversor extends Component {
   }
 
   converter () {
-    let de_para = `${this.props.moedaA}_${this.props.moedaB}`
-    let url = `https://free.currconv.com/api/v7/convert?q=${de_para}&compact=y&apiKey=ef1e8d7d844b87c98616`
+    const { moedaA, moedaB } = this.props
+    const inputValue = parseFloat(this.state.moedaA_valor)
+
+    if (Number.isNaN(inputValue)) {
+      this.setState({ moedaB_valor: 0 })
+      return
+    }
+
+    const url = `https://open.er-api.com/v6/latest/${moedaA}`
 
     fetch(url)
       .then(res => {
         return res.json()
       })
       .then(json => {
-        let cotacao = json[de_para].val
-        let moedaB_valor = (
-          parseFloat(this.state.moedaA_valor) * cotacao
-        ).toFixed(2)
-        if (isNaN(moedaB_valor)) {
-          this.setState({ moedaB_valor: 0 })
-          console.log(moedaB_valor)
-        } else {
-          this.setState({ moedaB_valor })
-          console.log(json[de_para])
+        const cotacao = json?.rates?.[moedaB]
+
+        if (typeof cotacao !== 'number') {
+          throw new Error('Invalid exchange rate payload')
         }
+
+        const moedaB_valor = (inputValue * cotacao).toFixed(2)
+        this.setState({ moedaB_valor })
+      })
+      .catch(() => {
+        this.setState({ moedaB_valor: 0 })
       })
   }
 
   render () {
     return (
       <div className='conversor'>
-        <h2>
+        <h2 className='conversor-title'>
           {this.props.moedaA} para {this.props.moedaB}
         </h2>
         <input
+          className='conversor-input'
           type='text'
           onChange={event => {
             this.setState({ moedaA_valor: event.target.value })
           }}
         ></input>
-        <input type='button' value='Converter' onClick={this.converter}></input>
-        <h2>{this.state.moedaB_valor}</h2>
+        <input
+          className='conversor-button'
+          type='button'
+          value='Converter'
+          onClick={this.converter}
+        ></input>
+        <h2 className='conversor-result'>{this.state.moedaB_valor}</h2>
       </div>
     )
   }
